@@ -7,11 +7,43 @@ namespace AugusToolPHP;
 class StringTool
 {
    /*
+    * Converte string para maiusculo
+    */
+   public static function textUpper($texto)
+   {
+      return mb_strtoupper($texto, 'UTF-8');
+   }
+
+   /*
+    * Converte string para minusculo
+    */
+   public static function textLower($texto)
+   {
+      return mb_strtolower($texto, 'UTF-8');
+   }
+
+   /*
        * Adiciona zeros a esquerda de uma string
        */
    public static function addZeroLeft($valor, $tamanho)
    {
       return str_pad($valor, $tamanho, "0", STR_PAD_LEFT);
+   }
+
+   /*
+    * Remove characteres especiais
+    */
+   public static function removeCharSpecial($valor)
+   {
+      return str_replace([".", "/", "-", "(", ")", " ", "[", "]", "_", "'"], "", trim($valor));
+   }
+
+   /*
+    * Remove characteres especiais de moeda
+    */
+   public static function removeCharSpecialMaskMoeda($valor)
+   {
+      return str_replace(["R$", "%", "$", " "], "", trim($valor));
    }
 
    /*
@@ -58,21 +90,5 @@ class StringTool
    public static function formatCEP($cep)
    {
       return preg_replace("/(\d{2})(\d{3})(\d{3})/", "\$1.\$2-\$3", $cep);
-   }
-
-   /*
-    * Converte string para maiusculo
-    */
-   public static function textUpper($texto)
-   {
-      return mb_strtoupper($texto, 'UTF-8');
-   }
-
-   /*
-    * Converte string para minusculo
-    */
-   public static function textLower($texto)
-   {
-      return mb_strtolower($texto, 'UTF-8');
    }
 }
