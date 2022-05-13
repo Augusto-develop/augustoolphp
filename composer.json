@@ -1,0 +1,19 @@
+{
+  "name": "augustooldev/augustoolphp",
+  "description": "Utilitário de Linguagem PHP",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Augusto Gomes",
+      "email": "augustoconctrl@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "AugusToolPHP\\": "src"
+    }
+  }
+}
