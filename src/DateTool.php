@@ -261,8 +261,11 @@ class DateTool
       return $list_meses[StringTool::addZeroLeft($numeroMes, 2)];
    }
 
-   public static function getFirsLastDiaMes($mes, $ano){
+   /*
+    * Retorno array com primeira data e ultima data
+    */
+   public static function getFirstLastDiaMes($mes, $ano){
       $firtDia = "{$ano}-{$mes}-01";
-      return ['fist' => $firtDia, 'last' => date("Y-m-t", strtotime($firtDia))];
+      return [$firtDia, date("Y-m-t", strtotime($firtDia))];
    }
 }
