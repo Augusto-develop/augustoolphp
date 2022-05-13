@@ -5,28 +5,31 @@ namespace AugusToolPHP;
 class DateTool
 {
    /*
-    * Valida data no formato brasileiro
-    * $data: (dd/mm/YYYY)
+    * Valida data
+    * $data: (dd/mm/YYYY) or (YYYY-mm-dd)
    */
-   public static function validateFormatDateBrasil($data)
+   public static function validateFormatDate($date, $formatAmerica = true)
    {
-      $ano = StringTool::addZeroLeft(substr($data, 6, 4), 4);
-      $mes = StringTool::addZeroLeft(substr($data, 3, 2), 2);
-      $dia = StringTool::addZeroLeft(substr($data, 0, 2), 2);
-      return checkdate((int)$mes, (int)$dia, (int)$ano);
-   }
+      if(is_null($date) || $date === ""){
+         return false;
+      }
+      if($formatAmerica){
+         //formato americano
+         preg_match_all("/([\d]{4}-[\d]{2}-[\d]{2})/", $date, $matches);
+         $dateCheck = !empty($matches[0]) ? $date : "";
+      }else{
+         //formato brasileiro
+         preg_match_all("/([\d]{2}\/[\d]{2}\/[\d]{4})/", $date, $matches);
+         $dateCheck = !empty($matches[0]) ? DateTool::dateBrasilToAmerica($date) : "";
+      }
 
-   /*
-    * Valida data no formato americano
-    * $data: (YYYY-mm-dd)
-   */
-   public static function validateFormatDateAmerica($data)
-   {
-      $ano = StringTool::addZeroLeft(substr($data, 0, 4), 4);
-      $mes = StringTool::addZeroLeft(substr($data, 5, 2), 2);
-      $dia = StringTool::addZeroLeft(substr($data, 8, 2), 2);
-      return checkdate((int)$mes, (int)$dia, (int)$ano);
-   }   
+      if($dateCheck !== ""){
+         $explodeDate = explode('-', $dateCheck);
+         //params: $mes, $dia, $ano
+         return checkdate((int)$explodeDate['1'], (int)$explodeDate['2'], (int)$explodeDate[0]);
+      }
+      return false;
+   }
 
    /*
     * Soma dias a uma data
@@ -75,7 +78,7 @@ class DateTool
    /*
     * Converte data americana para brasileira
     */
-   public static function convertDateAmericaToBrasil($dataAmericana)
+   public static function dateAmericaToBrasil($dataAmericana)
    {
       preg_match_all("/([\d]{2}\/[\d]{2}\/[\d]{4})/", $dataAmericana, $matches);
       if (empty($matches[0]) && $dataAmericana != "") {
@@ -88,7 +91,7 @@ class DateTool
    /*
     * Converte data brasileira para americana
     */
-   public static function convertDateBrasilToAmerica($dataBrasil)
+   public static function dateBrasilToAmerica($dataBrasil)
    {
       preg_match_all("/([\d]{4}-[\d]{2}-[\d]{2})/", $dataBrasil, $matches);
 
@@ -256,5 +259,10 @@ class DateTool
          '12' => 'Dezembro'
       ];
       return $list_meses[StringTool::addZeroLeft($numeroMes, 2)];
+   }
+
+   public static function getFirsLastDiaMes($mes, $ano){
+      $firtDia = "{$ano}-{$mes}-01";
+      return ['fist' => $firtDia, 'last' => date("Y-m-t", strtotime($firtDia))];
    }
 }
