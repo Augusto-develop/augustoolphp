@@ -194,11 +194,11 @@ class DateTool
    }
 
    /*
-    * Converte timestamp para data
+    * Converte data america para formato informado
     */
-   public static function timestampToDate($timestamp, $format = 'Y-m-d')
+   public static function reformatToDate($dateAmerica, $format = 'Y-m-d')
    {
-      return date($format, strtotime($timestamp));
+      return date($format, strtotime($dateAmerica));
    }
 
    /*
