@@ -66,4 +66,18 @@ class NumberTool
       }
       return $volta;
    }
+
+   /*
+    * format moeda/float sem pontucao
+    */
+   public static function formatMoedaNotPoint($valor, $integers = 0, $decimals = 0){
+      $strFormat = strpos($valor, ",") ? NumberTool::moedaToFloat($valor) : $valor;
+      $strExplode = explode(".", $strFormat);
+      if(empty($strExplode) || count($strExplode) > 2) return false;
+
+      $strPart1 = $integers > 0 ? StringTool::addZeroLeft($strExplode['0'], $integers) : $strExplode['0'];
+      $strPart2 = $decimals > 0 ? StringTool::addZeroRight($strExplode['1'], $decimals) : $strExplode['1'];
+
+      return $strPart1.$strPart2;
+   }
 }
