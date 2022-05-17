@@ -92,7 +92,7 @@ class StringTool
       return preg_replace("/(\d{2})(\d{3})(\d{3})/", "\$1.\$2-\$3", $cep);
    }
 
-   function removeAccents($string)
+   public static function removeAccents($string)
    {
       //return preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $string ) );
       $str = $string;
