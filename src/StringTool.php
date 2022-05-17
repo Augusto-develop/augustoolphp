@@ -31,6 +31,14 @@ class StringTool
    }
 
    /*
+       * Adiciona zeros a direira de uma string
+       */
+   public static function addZeroRight($valor, $tamanho)
+   {
+      return str_pad($valor, $tamanho, "0", STR_PAD_RIGHT);
+   }
+
+   /*
     * Remove characteres especiais
     */
    public static function removeCharSpecial($valor)
