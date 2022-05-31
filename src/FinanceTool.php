@@ -17,7 +17,7 @@ class FinanceTool
    /*
     * Mostra numero float por extenso
     */
-   public static function formatValorExtenso($valor)
+   public static function formatMoneyInFull($valor)
    {
       $maiusculas = false;
       $singular = array("centavo", "real", "mil", "milhão", "bilhão", "trilhão", "quatrilhão");
@@ -73,5 +73,10 @@ class FinanceTool
          $pregreplace = str_replace(" E ", " e ", $texto);
          return $pregreplace != null ? $pregreplace : $texto;
       }
+   }
+
+   public static function calcCardFee($valor, $taxa, $qtdeParcelas){
+      $calc = $valor * (100 +$taxa + (($taxa*$taxa)/100) + ($qtdeParcelas/100));
+      return number_format($calc/100, 2);
    }
 }

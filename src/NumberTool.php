@@ -69,6 +69,7 @@ class NumberTool
 
    /*
     * format moeda/float sem pontucao
+    * retorna mesma quantidade de integers e decimals caso parametro zero
     */
    public static function formatMoedaNotPoint($valor, $integers = 0, $decimals = 0){
       $strFormat = strpos($valor, ",") ? NumberTool::moedaToFloat($valor) : $valor;
