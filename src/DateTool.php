@@ -42,25 +42,25 @@ class DateTool
    /*
     * Subtrai dias de uma data
     */
-   public static function subtractDaysDate($dataAmerica, $qtdeDias)
+   public static function subtractDaysDate($dataAmerica, $qtdeDias, $format = 'Y-m-d')
    {
-      return date('Y-m-d', strtotime("-{$qtdeDias} days", strtotime($dataAmerica)));
+      return date($format, strtotime("-{$qtdeDias} days", strtotime($dataAmerica)));
    }
 
    /*
     * Soma meses a uma data
     */
-   public static function sumMonthsDate($dataAmerica, $qtdeMeses)
+   public static function sumMonthsDate($dataAmerica, $qtdeMeses, $format = 'Y-m-d')
    {
-      return date('Y-m-d', strtotime("+{$qtdeMeses} month", strtotime($dataAmerica)));
+      return date($format, strtotime("+{$qtdeMeses} month", strtotime($dataAmerica)));
    }
 
    /*
     * Subrai meses de uma data
     */
-   public static function subtractMonthsDate($dataAmerica, $qtdeMeses)
+   public static function subtractMonthsDate($dataAmerica, $qtdeMeses, $format = 'Y-m-d')
    {
-      return date('Y-m-d', strtotime("-{$qtdeMeses} month", strtotime($dataAmerica)));
+      return date($format, strtotime("-{$qtdeMeses} month", strtotime($dataAmerica)));
    }
 
    /*
