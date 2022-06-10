@@ -3,19 +3,24 @@
 
 namespace AugusToolPHP;
 
+use Exception;
 
 class RequestTool
 {
    /*
        * Requisicao via CURL
        */
-   public static function curRequest($uri, $postEnv = [])
+   public static function curRequest($uri, $postEnv = [], $curlDebugCookie)
    {
       $ch = curl_init($uri);
       curl_setopt($ch, CURLOPT_HEADER, 0);
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_COOKIE, CURL_DEBUG_COOKIE);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $postEnv);
+      if($curlDebugCookie != ""){
+         curl_setopt($ch, CURLOPT_COOKIE, $curlDebugCookie);
+      }
+      if(!empty($postEnv)){
+         curl_setopt($ch, CURLOPT_POST, 0);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $postEnv);
+      }
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept: application/json']);
       $dadosRequest = curl_exec($ch);
