@@ -10,7 +10,7 @@ class RequestTool
    /*
        * Requisicao via CURL
        */
-   public static function curRequest($uri, $postEnv = [], $curlDebugCookie)
+   public static function curRequest($uri, $postEnv = [], $curlDebugCookie = "")
    {
       $ch = curl_init($uri);
       curl_setopt($ch, CURLOPT_HEADER, 0);
