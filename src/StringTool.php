@@ -47,6 +47,14 @@ class StringTool
    }
 
    /*
+   * Remove quebra de linha
+   */
+   public static function removeBreakLine($texto)
+   {
+      return preg_replace("/\r|\n/", " ", $texto);
+   }
+
+   /*
     * Remove characteres especiais de moeda
     */
    public static function removeCharSpecialMaskMoeda($valor)
