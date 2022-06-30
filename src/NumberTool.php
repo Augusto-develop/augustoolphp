@@ -54,13 +54,23 @@ class NumberTool
    /*
     * Converte valor float em Aliquota
     */
-   public static function floatToAliquota($recebe, $decimals = 3, $returnNull = true, $sinal = false)
+   public static function floatToAliquota($recebe, $decimals = 3, $returnNull = true, $sinal = false,
+                                          $mostraDecimalCase0 = true)
    {
       if ($recebe != "") {
          @$volta = number_format($recebe, $decimals, ',', '.');
       } else {
          $volta = $returnNull ? "" : "0";
       }
+
+      $frac = substr(strpbrk($volta, ','), 1);
+      if (!$mostraDecimalCase0 && $frac != "") {
+         if (!(int)$frac > 0) {
+            $explode = explode(',', $volta);
+            $volta = $explode[0];
+         }
+      }
+
       if ($volta != "" && $sinal) {
          $volta .= " %";
       }
