@@ -26,7 +26,7 @@ class BoletoTool
          case '001'://BANCO DO BRASIL
             return substr($nossoNumComp, 1, 17);
          case '033'://SANTANDER
-            return substr($nossoNumComp, 5, 13);
+            return substr($nossoNumComp, -12) . '-' . $dvNossoNum;
          case '136'://UNICRED
             return $carteiraGeracao . "/" . substr($nossoNumComp, 8, 10) . '-' . $dvNossoNum;
       }
