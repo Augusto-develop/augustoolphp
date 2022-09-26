@@ -119,6 +119,7 @@ class StringTool
       $str = preg_replace('/[úùûü]/ui', 'u', $str);
       $str = preg_replace('/[ç]/ui', 'c', $str);
       $str = preg_replace('/[ºª]/ui', '', $str);
+      $str = iconv( "UTF-8" , "ASCII//TRANSLIT//IGNORE" , $str);
       //$str = preg_replace('/[^a-z0-9]/i', '_', $str);
       //$str = preg_replace('/_+/', '_', $str);
       return $str;
