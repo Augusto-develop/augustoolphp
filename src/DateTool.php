@@ -166,8 +166,8 @@ class DateTool
     */
    public static function differenceBetweenDates($dataInicio, $dataFim)
    {
-      $mktime_datainicio = DateTool::retornaMktime($dataInicio);
-      $mktime_datafim = DateTool::retornaMktime($dataFim);
+      $mktime_datainicio = DateTool::createMktime($dataInicio);
+      $mktime_datafim = DateTool::createMktime($dataFim);
       $diferenca_dias = floor(($mktime_datafim - $mktime_datainicio) / 86400);
       return $diferenca_dias;
    }
@@ -177,8 +177,8 @@ class DateTool
     */
    public static function checkGreaterDate($dataReferencia, $dataTeste)
    {
-      $mktime_datainicio = DateTool::retornaMktime($dataReferencia);
-      $mktime_datafim = DateTool::retornaMktime($dataTeste);
+      $mktime_datainicio = DateTool::createMktime($dataReferencia);
+      $mktime_datafim = DateTool::createMktime($dataTeste);
       return $mktime_datafim > $mktime_datainicio;
    }
 
@@ -187,9 +187,9 @@ class DateTool
     */
    public static function checkDateWithinPeriod($dataInicio, $dataFim, $dataTeste)
    {
-      $mktime_datainicio = DateTool::retornaMktime($dataInicio);
-      $mktime_datafim = DateTool::retornaMktime($dataFim);
-      $mktime_datateste = DateTool::retornaMktime($dataTeste);
+      $mktime_datainicio = DateTool::createMktime($dataInicio);
+      $mktime_datafim = DateTool::createMktime($dataFim);
+      $mktime_datateste = DateTool::createMktime($dataTeste);
       return $mktime_datateste >= $mktime_datainicio && $mktime_datateste <= $mktime_datafim;
    }
 
@@ -267,5 +267,11 @@ class DateTool
    public static function getFirstLastDiaMes($mes, $ano){
       $firtDia = "{$ano}-{$mes}-01";
       return [$firtDia, date("Y-m-t", strtotime($firtDia))];
+   }
+
+
+   public static function createMktime($dataAmerica)
+   {
+      return mktime(0, 0, 0, substr($dataAmerica, 5, 2), substr($dataAmerica, 8, 2), substr($dataAmerica, 0, 4));
    }
 }
