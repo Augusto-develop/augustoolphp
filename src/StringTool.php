@@ -62,19 +62,33 @@ class StringTool
       return str_replace(["R$", "%", "$", " "], "", trim($valor));
    }
 
+
+   public static function retiraCaracEspec($valor, $removeEspaco = true)
+   {
+      $chars = array(".", "/", "-", "(", ")", "[", "]", "_", "'", "%");
+      if ($removeEspaco) {
+         $chars[] = " ";
+      }
+      return str_replace($chars, "", trim($valor));
+   }
+
    /*
     * Formata CPF/CNPJ
     * CPF: 999.999.999-99
     * CNPJ: 99.999.999/9999-99
     */
-   public static function formatCPFCNPJ($cpfcnpj)
+   public static function formatCPFCNPJ($cpfcnpj, $suppression = false)
    {
-      $numero = DateTool::retiraCaracEspec($cpfcnpj);
+      $numero = StringTool::retiraCaracEspec($cpfcnpj);
       switch (strlen($numero)) {
          case 14:
             return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $numero);
          case 11:
-            return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $numero);
+            $replacement = "\$1.\$2.\$3-\$4";
+            if ($suppression) {
+               $replacement = "\$1.***.***-\$4";
+            }
+            return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", $replacement, $numero);
          default:
             return $cpfcnpj;
       }
