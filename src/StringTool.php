@@ -82,7 +82,11 @@ class StringTool
       $numero = StringTool::retiraCaracEspec($cpfcnpj);
       switch (strlen($numero)) {
          case 14:
-            return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $numero);
+            $replacement = "\$1.\$2.\$3/\$4-\$5";
+            if ($suppression) {
+               $replacement = "\$1.***.***/\$4-\$5";
+            }
+            return preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", $replacement, $numero);
          case 11:
             $replacement = "\$1.\$2.\$3-\$4";
             if ($suppression) {
