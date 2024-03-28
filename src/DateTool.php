@@ -242,7 +242,7 @@ class DateTool
    /*
    * Retorna ArrayList Meses (pt)
    */
-   public static function getMontshName($numeroMes)
+   public static function getMontshName($numeroMes = "")
    {
       $list_meses = [
          '01' => 'Janeiro',
@@ -258,7 +258,7 @@ class DateTool
          '11' => 'Novembro',
          '12' => 'Dezembro'
       ];
-      return $list_meses[StringTool::addZeroLeft($numeroMes, 2)];
+      return $numeroMes !== "" ? $list_meses[StringTool::addZeroLeft($numeroMes, 2)] : $list_meses;
    }
 
    /*
