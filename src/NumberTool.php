@@ -28,7 +28,7 @@ class NumberTool
    public static function moedaToFloat($num)
    {
       if ($num != "" && strpos($num, ",")) {
-         return str_replace([".", ","], ["", "."], $num);
+         return (float)str_replace([".", ","], ["", "."], $num);
       }
       return $num;
    }
