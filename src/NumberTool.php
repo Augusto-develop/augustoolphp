@@ -27,10 +27,13 @@ class NumberTool
     */
    public static function moedaToFloat($num)
    {
-      if ($num != "" && strpos($num, ",")) {
-         return (float)str_replace([".", ","], ["", "."], StringTool::removeCharSpecialMaskMoeda($num));
+      $valor = $num;
+      if ($valor != "" && strpos($valor, ",")) {
+         $valor = StringTool::removeCharSpecialMaskMoeda($num);
+         $valor = str_replace([".", ","], ["", "."], $valor);
+         return is_numeric($valor) ? (float)$valor : $valor;
       }
-      return $num;
+      return $valor;
    }
 
    /*
