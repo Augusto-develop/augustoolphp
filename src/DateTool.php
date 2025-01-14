@@ -68,7 +68,7 @@ class DateTool
     */
    public static function subtractHoursFromCurrentTime($qtdeHoras, $format = "")
    {
-      $hora_calc = strtotime("-{$qtdeHoras} hour", DateTool::getCurrentMktime());
+      $hora_calc = strtotime("-{$qtdeHoras} hour",  time());
       if ($format) {
          return date($format, $hora_calc);
       }
