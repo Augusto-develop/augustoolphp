@@ -29,6 +29,8 @@ class BoletoTool
             return substr($nossoNumComp, -12) . '-' . $dvNossoNum;
          case '136'://UNICRED
             return $carteiraGeracao . "/" . substr($nossoNumComp, 8, 10) . '-' . $dvNossoNum;
+          case '748'://SICREDI
+              return substr($nossoNumComp, 10, 2) . "/" . substr($nossoNumComp, -6) . '-' . $dvNossoNum;
       }
    }
 }
